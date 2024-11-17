@@ -49,6 +49,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
   const onProviderSignIn = (value: "github" | "google") => {
     setPending(true);
+
     signIn(value).finally(() => {
       setPending(false);
     });
