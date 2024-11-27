@@ -6,8 +6,5 @@ export const useCurrentUser = () => {
   const data = useQuery(api.users.current);
   const isLoading = data === undefined;
 
-  return {
-    data,
-    isLoading,
-  };
+  return { data, isLoading };
 };
