@@ -6,6 +6,7 @@ import {
   MessageSquareText,
 } from "lucide-react";
 
+import { useChannelId } from "@/hooks/use-channel-id";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 import { useGetMembers } from "@/features/members/api/use-get-members";
@@ -20,6 +21,7 @@ import WorkspaceHeader from "./workspace-header";
 import WorkspaceSection from "./workspace-section";
 
 const WorkspaceSidebar = () => {
+  const channelId = useChannelId();
   const workspaceId = useWorkspaceId();
 
   const [_open, setOpen] = useCreateChannelModal();
@@ -72,9 +74,10 @@ const WorkspaceSidebar = () => {
         {channels?.map((item) => (
           <SidebarItem
             key={item._id}
+            id={item._id}
             icon={HashIcon}
             label={item.name}
-            id={item._id}
+            variant={item._id === channelId ? "active" : "default"}
           />
         ))}
       </WorkspaceSection>
