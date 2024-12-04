@@ -25,7 +25,7 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
           autoSaveId="ca-workspace-layout"
         >
           <ResizablePanel
-            minSize={11}
+            minSize={12}
             defaultSize={20}
             className="bg-[#5E2C5F]"
           >
