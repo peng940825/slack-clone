@@ -84,7 +84,7 @@ export const InviteModal = ({
             </p>
             <Button size="sm" variant="ghost" onClick={handleCopy}>
               Copy link
-              <CopyIcon className="size-4 ml-2" />
+              <CopyIcon className="size-4" />
             </Button>
           </div>
           <div className="w-full flex items-center justify-between">
@@ -94,7 +94,7 @@ export const InviteModal = ({
               onClick={handleNewCode}
             >
               New code
-              <RefreshCcw className="size-4 ml-2" />
+              <RefreshCcw className="size-4" />
             </Button>
             <DialogClose asChild>
               <Button>Close</Button>

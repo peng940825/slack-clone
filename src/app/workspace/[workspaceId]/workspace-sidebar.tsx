@@ -26,17 +26,13 @@ const WorkspaceSidebar = () => {
 
   const [_open, setOpen] = useCreateChannelModal();
 
+  const { data: members } = useGetMembers({ workspaceId });
+  const { data: channels } = useGetChannels({ workspaceId });
   const { data: member, isLoading: memberLoading } = useCurrentMember({
     workspaceId,
   });
   const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({
     id: workspaceId,
-  });
-  const { data: channels, isLoading: _channelsLoading } = useGetChannels({
-    workspaceId,
-  });
-  const { data: members, isLoading: _membersLoading } = useGetMembers({
-    workspaceId,
   });
 
   if (memberLoading || workspaceLoading) {
