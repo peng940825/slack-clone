@@ -116,7 +116,10 @@ export const Header = ({ title }: HeaderProps) => {
             <FaChevronDown className="!size-2.5" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="p-0 bg-gray-50 overflow-hidden">
+        <DialogContent
+          className="p-0 bg-gray-50 overflow-hidden"
+          aria-describedby={undefined}
+        >
           <DialogHeader className="p-4 border-b bg-white">
             <DialogTitle># {title}</DialogTitle>
           </DialogHeader>
@@ -135,7 +138,7 @@ export const Header = ({ title }: HeaderProps) => {
                   <p className="text-sm"># {title}</p>
                 </div>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent aria-describedby={undefined}>
                 <DialogHeader>
                   <DialogTitle>Rename this channel</DialogTitle>
                 </DialogHeader>

@@ -94,7 +94,10 @@ const PreferencesModal = ({
     <>
       <ConfirmDialog />
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="p-0 bg-gray-50 overflow-hidden">
+        <DialogContent
+          className="p-0 bg-gray-50 overflow-hidden"
+          aria-describedby={undefined}
+        >
           <DialogHeader className="p-4 border-b bg-white">
             <DialogTitle>{value}</DialogTitle>
           </DialogHeader>
@@ -111,7 +114,7 @@ const PreferencesModal = ({
                   <p className="text-sm">{value}</p>
                 </div>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent aria-describedby={undefined}>
                 <DialogHeader>
                   <DialogTitle>Rename this workspace</DialogTitle>
                 </DialogHeader>
