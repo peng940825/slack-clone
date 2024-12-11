@@ -139,3 +139,12 @@ body,
 .ql-renderer {
   padding: 0 !important;
 }
+
+.ql-tooltip {
+  z-index: 21 !important;
+}
+
+.messages-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #dcdcdc #f8f8f8;
+}
