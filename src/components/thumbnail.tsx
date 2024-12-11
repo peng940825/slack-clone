@@ -32,11 +32,13 @@ export const Thumbnail = ({ url }: ThumbnailProps) => {
         aria-describedby={undefined}
       >
         <DialogTitle className="hidden" />
-        <img
-          src={url}
-          className="rounded-md object-cover size-full"
-          alt="Message image"
-        />
+        <div className="max-h-[95vh]">
+          <img
+            src={url}
+            className="rounded-md object-cover size-full"
+            alt="Message image"
+          />
+        </div>
       </DialogContent>
     </Dialog>
   );

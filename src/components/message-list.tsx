@@ -1,8 +1,15 @@
+import { useState } from "react";
 import { format, isToday, isYesterday, differenceInMinutes } from "date-fns";
 
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+
+import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
 
 import { Message } from "./message";
+import { ChannelHero } from "./channel-hero";
+
+import { Id } from "../../convex/_generated/dataModel";
 
 const TIME_THRESHOLD = 5;
 
@@ -43,6 +50,11 @@ export const MessageList = ({
   channelCreationTime,
   variant = "channel",
 }: MessageListProps) => {
+  const [editingId, setEditingId] = useState<Id<"messages"> | null>(null);
+
+  const workspaceId = useWorkspaceId();
+  const { data: currentMember } = useCurrentMember({ workspaceId });
+
   const groupedMessages = data?.reduce(
     (groups, message) => {
       const date = new Date(message!._creationTime);
@@ -88,27 +100,30 @@ export const MessageList = ({
               <Message
                 key={message._id}
                 id={message._id}
-                isAuthor={false}
-                isEditing={false}
+                isAuthor={message.memberId === currentMember?._id}
+                isEditing={editingId === message._id}
                 image={message.image}
                 memberId={message.memberId}
                 body={message.body}
                 updatedAt={message.updateAt}
                 createdAt={message._creationTime}
                 reactions={message.reactions}
-                setEditingId={() => {}}
+                setEditingId={setEditingId}
                 isCompact={isCompact}
                 authorName={message.user.name}
                 authorImage={message.user.image}
                 threadCount={message.threadCount}
                 threadImage={message.threadImage}
                 threadTimestamp={message.threadTimestamp}
-                hideThreadButton={false}
+                hideThreadButton={variant === "thread"}
               />
             );
           })}
         </div>
       ))}
+      {variant === "channel" && channelName && channelCreationTime && (
+        <ChannelHero name={channelName} creationTime={channelCreationTime} />
+      )}
     </div>
   );
 };
