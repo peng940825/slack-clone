@@ -6,6 +6,7 @@ import {
   MessageSquareText,
 } from "lucide-react";
 
+import { useMemberId } from "@/hooks/use-member-id";
 import { useChannelId } from "@/hooks/use-channel-id";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
@@ -21,6 +22,7 @@ import WorkspaceHeader from "./workspace-header";
 import WorkspaceSection from "./workspace-section";
 
 const WorkspaceSidebar = () => {
+  const memberId = useMemberId();
   const channelId = useChannelId();
   const workspaceId = useWorkspaceId();
 
@@ -86,9 +88,10 @@ const WorkspaceSidebar = () => {
         {members?.map((item) => (
           <UserItem
             key={item._id}
-            id={member._id}
+            id={item._id}
             label={item.user.name}
             image={item.user.image}
+            variant={item._id === memberId ? "active" : "default"}
           />
         ))}
       </WorkspaceSection>
