@@ -14,7 +14,9 @@ export const ConversationHero = ({
       <div className="flex items-center gap-x-1 mb-2">
         <Avatar className="!size-14 mr-2">
           <AvatarImage src={image} />
-          <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+          <AvatarFallback>
+            <span className="text-3xl">{name.charAt(0).toUpperCase()}</span>
+          </AvatarFallback>
         </Avatar>
       </div>
       <p className="text-2xl font-bold">{name}</p>

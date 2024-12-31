@@ -116,6 +116,7 @@ export const MessageList = ({
                 authorImage={message.user.image}
                 threadCount={message.threadCount}
                 threadImage={message.threadImage}
+                threadName={message.threadName}
                 threadTimestamp={message.threadTimestamp}
                 hideThreadButton={variant === "thread"}
               />

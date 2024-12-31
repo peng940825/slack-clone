@@ -227,6 +227,7 @@ export const Thread = ({ messageId, onClose }: ThreadProps) => {
                   authorImage={message.user.image}
                   threadCount={message.threadCount}
                   threadImage={message.threadImage}
+                  threadName={message.threadName}
                   threadTimestamp={message.threadTimestamp}
                   hideThreadButton
                 />

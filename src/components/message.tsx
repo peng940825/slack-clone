@@ -8,6 +8,7 @@ import { Hint } from "./hint";
 import { Toolbar } from "./toolbar";
 import { Thumbnail } from "./thumbnail";
 import { Reactions } from "./reactions";
+import { ThreadBar } from "./thread-bar";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
 import { cn } from "@/lib/utils";
@@ -41,6 +42,7 @@ interface MessageProps {
   authorImage?: string;
   threadCount?: number;
   threadImage?: string;
+  threadName?: string;
   threadTimestamp?: number;
   hideThreadButton?: boolean;
 }
@@ -65,6 +67,7 @@ export const Message = ({
   authorImage,
   threadCount,
   threadImage,
+  threadName,
   threadTimestamp,
   hideThreadButton,
 }: MessageProps) => {
@@ -170,6 +173,13 @@ export const Message = ({
                   </span>
                 ) : null}
                 <Reactions data={reactions} onChange={handleReaction} />
+                <ThreadBar
+                  name={threadName}
+                  count={threadCount}
+                  image={threadImage}
+                  timestamp={threadTimestamp}
+                  onClick={() => onOpenMessage(id)}
+                />
               </div>
             )}
           </div>
@@ -241,6 +251,13 @@ export const Message = ({
                 <span className="text-xs text-muted-foreground">(edited)</span>
               ) : null}
               <Reactions data={reactions} onChange={handleReaction} />
+              <ThreadBar
+                name={threadName}
+                count={threadCount}
+                image={threadImage}
+                timestamp={threadTimestamp}
+                onClick={() => onOpenMessage(id)}
+              />
             </div>
           )}
         </div>
