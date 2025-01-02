@@ -71,7 +71,7 @@ export const Message = ({
   threadTimestamp,
   hideThreadButton,
 }: MessageProps) => {
-  const { parentMessageId, onOpenMessage, onClose } = usePanel();
+  const { parentMessageId, onOpenMessage, onOpenProfile, onClose } = usePanel();
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Delete message",
@@ -84,6 +84,8 @@ export const Message = ({
     useRemoveMessage();
   const { mutate: toggleReaction, isPending: isTogglingReaction } =
     useToggleReaction();
+
+  const isPending = isUpdatingMessage || isTogglingReaction;
 
   const handleReaction = (value: string) => {
     toggleReaction(
@@ -158,7 +160,7 @@ export const Message = ({
                 <Editor
                   variant="update"
                   defaultValue={JSON.parse(body)}
-                  disabled={isUpdatingMessage}
+                  disabled={isPending}
                   onSubmit={handleUpdate}
                   onCancel={() => setEditingId(null)}
                 />
@@ -186,7 +188,7 @@ export const Message = ({
           {!isEditing && (
             <Toolbar
               isAuthor={isAuthor}
-              isPending={isUpdatingMessage}
+              isPending={isPending}
               handleEdit={() => setEditingId(id)}
               handleThread={() => onOpenMessage(id)}
               handleDelete={handleRemove}
@@ -211,7 +213,7 @@ export const Message = ({
         )}
       >
         <div className="flex items-start gap-2">
-          <button>
+          <button onClick={() => onOpenProfile(memberId)}>
             <Avatar>
               <AvatarImage src={authorImage} />
               <AvatarFallback>
@@ -224,7 +226,7 @@ export const Message = ({
               <Editor
                 variant="update"
                 defaultValue={JSON.parse(body)}
-                disabled={isUpdatingMessage}
+                disabled={isPending}
                 onSubmit={handleUpdate}
                 onCancel={() => setEditingId(null)}
               />
@@ -234,7 +236,7 @@ export const Message = ({
               <div className="text-sm">
                 <button
                   className="font-bold text-primary hover:underline"
-                  onClick={() => {}}
+                  onClick={() => onOpenProfile(memberId)}
                 >
                   {authorName}
                 </button>
@@ -264,7 +266,7 @@ export const Message = ({
         {!isEditing && (
           <Toolbar
             isAuthor={isAuthor}
-            isPending={isUpdatingMessage}
+            isPending={isPending}
             handleEdit={() => setEditingId(id)}
             handleThread={() => onOpenMessage(id)}
             handleDelete={handleRemove}
