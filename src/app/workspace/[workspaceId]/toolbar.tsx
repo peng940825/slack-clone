@@ -49,11 +49,7 @@ const Toolbar = () => {
           <Search className="size-4 text-white mr-2" />
           <span className="text-white text-sm">Search</span>
         </Button>
-        <CommandDialog
-          open={open}
-          onOpenChange={setOpen}
-          aria-describedby={undefined}
-        >
+        <CommandDialog open={open} onOpenChange={setOpen}>
           <CommandInput placeholder="Type a command or search..." />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
