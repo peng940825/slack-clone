@@ -1,7 +1,7 @@
 import { toast } from "sonner";
-import { useState } from "react";
 import { TrashIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 import { useConfirm } from "@/hooks/use-confirm";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
@@ -90,18 +90,24 @@ const PreferencesModal = ({
     );
   };
 
+  useEffect(() => {
+    if (open) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      document.body.style.pointerEvents = "";
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [open]);
+
   return (
     <>
       <ConfirmDialog />
-      <Dialog
-        open={open}
-        onOpenChange={(open) => {
-          setOpen(open);
-          setTimeout(() => {
-            document.body.style.pointerEvents = open ? "none" : "";
-          }, 0);
-        }}
-      >
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
           className="p-0 bg-gray-50 overflow-hidden"
           aria-describedby={undefined}

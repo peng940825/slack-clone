@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { useEffect } from "react";
 import { CopyIcon, RefreshCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -67,18 +68,24 @@ export const InviteModal = ({
     });
   };
 
+  useEffect(() => {
+    if (open) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      document.body.style.pointerEvents = "";
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [open]);
+
   return (
     <>
       <ConfirmDialog />
-      <Dialog
-        open={open}
-        onOpenChange={(open) => {
-          setOpen(open);
-          setTimeout(() => {
-            document.body.style.pointerEvents = open ? "none" : "";
-          }, 0);
-        }}
-      >
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Invite people to {name}</DialogTitle>
