@@ -97,7 +97,9 @@ const PreferencesModal = ({
         open={open}
         onOpenChange={(open) => {
           setOpen(open);
-          document.body.style.pointerEvents = open ? "none" : "";
+          setTimeout(() => {
+            document.body.style.pointerEvents = open ? "none" : "";
+          }, 0);
         }}
       >
         <DialogContent
