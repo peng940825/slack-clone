@@ -70,7 +70,13 @@ export const InviteModal = ({
   return (
     <>
       <ConfirmDialog />
-      <Dialog open={open} onOpenChange={() => setOpen(false)}>
+      <Dialog
+        open={open}
+        onOpenChange={(open) => {
+          setOpen(open);
+          document.body.style.pointerEvents = open ? "none" : "";
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Invite people to {name}</DialogTitle>

@@ -93,7 +93,13 @@ const PreferencesModal = ({
   return (
     <>
       <ConfirmDialog />
-      <Dialog open={open} onOpenChange={() => setOpen(false)}>
+      <Dialog
+        open={open}
+        onOpenChange={(open) => {
+          setOpen(open);
+          document.body.style.pointerEvents = open ? "none" : "";
+        }}
+      >
         <DialogContent
           className="p-0 bg-gray-50 overflow-hidden"
           aria-describedby={undefined}
