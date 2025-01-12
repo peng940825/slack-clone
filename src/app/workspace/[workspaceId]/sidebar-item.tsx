@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MouseEvent } from "react";
 import { LucideIcon } from "lucide-react";
 import { IconType } from "react-icons/lib";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -32,6 +33,12 @@ interface SidebarItemProps {
 const SidebarItem = ({ id, label, icon: Icon, variant }: SidebarItemProps) => {
   const workspaceId = useWorkspaceId();
 
+  const preventNavigation = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (id === "threads" || id === "drafts") {
+      event.preventDefault();
+    }
+  };
+
   return (
     <Button
       size="sm"
@@ -39,7 +46,10 @@ const SidebarItem = ({ id, label, icon: Icon, variant }: SidebarItemProps) => {
       className={cn(sidebarItemVariants({ variant }))}
       asChild
     >
-      <Link href={`/workspace/${workspaceId}/channel/${id}`}>
+      <Link
+        href={`/workspace/${workspaceId}/channel/${id}`}
+        onClick={preventNavigation}
+      >
         <Icon className="size-3.5 mr-1 shrink-0" />
         <span className="text-sm truncate">{label}</span>
       </Link>
